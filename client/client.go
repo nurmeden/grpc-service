@@ -10,13 +10,13 @@ import (
 )
 
 func main() {
-	conn, err := grpc.Dial(":8080", grpc.WithInsecure())
+	conn, err := grpc.Dial(":8080", grpc.WithInsecure()) // создает клиентское подключение к серверу gRPC
 	if err != nil {
 		log.Fatalf("failed to connect: %v", err)
 	}
 	defer conn.Close()
 
-	c := pb.NewMyServiceClient(conn)
+	c := pb.NewMyServiceClient(conn) // Создает новый клиентский объект для взаимодействия с сервером
 
 	name := "Alice"
 	resp, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name})
